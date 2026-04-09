@@ -5,18 +5,15 @@ function Cart({ cart, onUpdateQuantity, onRemoveItem, onProceedToPayment, onBack
   return (
     <div className="cart-container">
       <div className="cart-header">
-        <button className="btn-back" onClick={onBackToMenu}>
-          ← Back to Menu
-        </button>
-        <h1>🛒 Your Cart</h1>
+        <h1>🛒 YOUR CART</h1>
       </div>
 
       {cart.length === 0 ? (
         <div className="empty-cart">
           <p className="empty-cart-icon">🛒</p>
           <p className="empty-cart-text">Your cart is empty</p>
-          <button className="btn btn-primary" onClick={onBackToMenu}>
-            Browse Menu
+          <button className="btn btn-primary" style={{ marginTop: '1.5rem' }} onClick={onBackToMenu}>
+            Back to Menu
           </button>
         </div>
       ) : (
@@ -25,55 +22,57 @@ function Cart({ cart, onUpdateQuantity, onRemoveItem, onProceedToPayment, onBack
             {cart.map(item => (
               <div key={item.id} className="cart-item">
                 <div className="cart-item-info">
-                  <h3 className="cart-item-name">{item.name}</h3>
+                  <h3>{item.name}</h3>
                   <p className="cart-item-price">₹{item.price} each</p>
                 </div>
 
-                <div className="cart-item-controls">
-                  <div className="quantity-control">
-                    <button
-                      className="quantity-btn"
-                      onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                      disabled={item.quantity <= 1}
-                    >
-                      -
-                    </button>
-                    <span className="quantity-display">{item.quantity}</span>
-                    <button
-                      className="quantity-btn"
-                      onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  <div className="cart-item-subtotal">
-                    <span className="subtotal-label">Subtotal:</span>
-                    <span className="subtotal-amount">₹{item.price * item.quantity}</span>
-                  </div>
-
+                <div className="quantity-control">
                   <button
-                    className="btn-remove"
-                    onClick={() => onRemoveItem(item.id)}
+                    className="quantity-btn"
+                    onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                    disabled={item.quantity <= 1}
                   >
-                    🗑️
+                    −
+                  </button>
+                  <span className="quantity-display">{item.quantity}</span>
+                  <button
+                    className="quantity-btn"
+                    onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                  >
+                    +
                   </button>
                 </div>
+
+                <button
+                  className="btn-remove"
+                  onClick={() => onRemoveItem(item.id)}
+                  title="Remove item"
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
 
           <div className="cart-summary">
             <div className="cart-total">
-              <span className="total-label">Total Amount:</span>
+              <span className="total-label">TOTAL:</span>
               <span className="total-amount">₹{totalPrice}</span>
             </div>
 
             <button 
-              className="btn btn-primary btn-proceed"
+              className="btn btn-proceed"
               onClick={onProceedToPayment}
             >
-              Proceed to Payment →
+              Proceed to Payment ✓
+            </button>
+            
+            <button
+              className="btn btn-back"
+              onClick={onBackToMenu}
+              style={{ marginTop: '0.75rem' }}
+            >
+              ← Back to Menu
             </button>
           </div>
         </>

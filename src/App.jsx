@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import NameForm from './components/NameForm';
 import Menu from './components/Menu';
@@ -10,6 +10,11 @@ function App() {
   const [currentStep, setCurrentStep] = useState('name'); // 'name', 'menu', 'cart', 'payment'
   const [customerName, setCustomerName] = useState('');
   const [cart, setCart] = useState([]);
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStep]);
 
   // WhatsApp configuration - REPLACE WITH YOUR CAFE'S PHONE NUMBER
   const CAFE_WHATSAPP_NUMBER = '919876543210'; // Format: country code + number (no + or spaces)
@@ -97,6 +102,45 @@ Order placed at: ${new Date().toLocaleString('en-IN')}`;
 
   return (
     <div className="app">
+      {/* Maati Bistro Hero Banner */}
+      <div className="hero-banner">
+        <div className="hero-content">
+          <div className="mandala-ornament"></div>
+          <div className="logo-text">
+            <div className="logo-english">MAATI <span className="logo-hindi">माती</span></div>
+            <div className="divider-gold"></div>
+            <div className="logo-subtext">Bistro</div>
+          </div>
+          <div className="tagline">From Our Soul To Your Heart</div>
+          <div className="bistro-info">
+            🍽️ Artisanal Coffee | Fusion Cuisine | Sustainable Sourcing | Craft Cocktails
+          </div>
+          
+          {/* Instagram Link */}
+          <a 
+            href="https://www.instagram.com/maati_bistro/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="instagram-link"
+            title="Follow us on Instagram"
+          >
+            📸 @maati_bistro
+          </a>
+
+          {/* GitHub Link */}
+          <a 
+            href="https://github.com/sujal/Cafe-Frontend" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="instagram-link"
+            style={{ marginLeft: '1rem' }}
+            title="View source code on GitHub"
+          >
+            🔗 GitHub
+          </a>
+        </div>
+      </div>
+
       {currentStep === 'name' && (
         <NameForm onNameSubmit={handleNameSubmit} />
       )}

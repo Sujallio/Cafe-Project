@@ -21,10 +21,22 @@ function Menu({ cart, onAddToCart, onProceedToCart }) {
     return cartItem ? cartItem.quantity : 0;
   };
 
+  // Category emoji mapping
+  const categoryEmoji = {
+    'Coffee': '☕',
+    'Food': '🍔',
+    'Snacks': '🍟',
+    'Sandwich': '🥪',
+    'Pizza': '🍕',
+    'Pasta': '🍝',
+    'Beverages': '🥤',
+    'Drinks': '🍹'
+  };
+
   return (
     <div className="menu-container">
-      <div className="menu-header">
-        <h1>🍽️ Our Menu</h1>
+      <div className="menu-section-header">
+        <h2 className="section-title">☕ Our Menu</h2>
         
         {/* Category Filter */}
         <div className="category-filter">
@@ -34,7 +46,7 @@ function Menu({ cart, onAddToCart, onProceedToCart }) {
               className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
               onClick={() => setSelectedCategory(category)}
             >
-              {category}
+              {categoryEmoji[category] || '🍽️'} {category}
             </button>
           ))}
         </div>
@@ -47,20 +59,19 @@ function Menu({ cart, onAddToCart, onProceedToCart }) {
           
           return (
             <div key={item.id} className="menu-card">
-              <div className="menu-card-placeholder">
-                <span className="placeholder-icon">🍽️</span>
+              <div className="menu-card-image">
+                <span>{categoryEmoji[item.category] || '🍽️'}</span>
               </div>
               
               <div className="menu-card-content">
                 <h3 className="menu-item-name">{item.name}</h3>
-                <p className="menu-item-category">{item.category}</p>
-                <p className="menu-item-price">₹{item.price}</p>
+                <p className="menu-item-price"><span className="price-symbol">₹</span>{item.price}</p>
                 
                 <button 
                   className="btn btn-add"
                   onClick={() => onAddToCart(item)}
                 >
-                  Add to Cart {quantity > 0 && `(${quantity})`}
+                  {quantity > 0 ? `In Cart (${quantity})` : 'Add to Cart'}
                 </button>
               </div>
             </div>
@@ -74,7 +85,7 @@ function Menu({ cart, onAddToCart, onProceedToCart }) {
           className="btn btn-cart-float"
           onClick={onProceedToCart}
         >
-          View Cart ({cartItemCount} items)
+          View Cart <span className="cart-count">{cartItemCount}</span>
         </button>
       )}
     </div>

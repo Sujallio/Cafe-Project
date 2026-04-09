@@ -26,15 +26,17 @@ function NameForm({ onNameSubmit }) {
   return (
     <div className="name-form-container">
       <div className="name-form-card">
-        <h1>☕ Welcome to Our Café</h1>
-        <p className="subtitle">Please enter your name to start ordering</p>
+        <div className="mandala-ornament" style={{ width: '80px', height: '80px', marginTop: '-40px' }}></div>
+        <h1 className="form-title">Welcome to MAATI</h1>
+        <p className="form-subtitle">Please enter your name to begin your culinary journey</p>
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
+            <label className="form-label">Your Name</label>
             <input
               type="text"
               className={`form-input ${error ? 'error' : ''}`}
-              placeholder="Enter your name"
+              placeholder="Enter your full name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -46,7 +48,7 @@ function NameForm({ onNameSubmit }) {
           </div>
           
           <button type="submit" className="btn btn-primary">
-            Next →
+            Proceed to Menu ✓
           </button>
         </form>
       </div>
