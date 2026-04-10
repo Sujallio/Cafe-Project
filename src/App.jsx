@@ -126,18 +126,6 @@ Order placed at: ${new Date().toLocaleString('en-IN')}`;
           >
             📸 @maati_bistro
           </a>
-
-          {/* GitHub Link */}
-          <a 
-            href="https://github.com/sujal/Cafe-Frontend" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="instagram-link"
-            style={{ marginLeft: '1rem' }}
-            title="View source code on GitHub"
-          >
-            🔗 GitHub
-          </a>
         </div>
       </div>
 
